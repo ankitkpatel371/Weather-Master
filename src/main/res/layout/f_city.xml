@@ -11,8 +11,9 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -32,6 +33,12 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_86"
             tools:text="19 \u00B0" />
+
+        <ImageView
+            android:layout_margin="5dp"
+            android:id="@+id/imvWeatherCondition"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtCityTempLowMax"
@@ -53,8 +60,17 @@
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-
+<RelativeLayout
+    android:orientation="vertical"
+    android:gravity="bottom"
+    android:layout_weight="1"
+    android:layout_width="match_parent"
+    android:layout_height="0dp">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
     <include
         android:id="@+id/dayOne"
         layout="@layout/v_i_temp_day" />
@@ -69,6 +85,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="-1dp" />
-
-
+</LinearLayout>
+</RelativeLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -32,6 +32,7 @@ data class current(
 
 data class daily(
     val temp: temp,
+    val weather: List<weather>,
     val dt:String
 )
 

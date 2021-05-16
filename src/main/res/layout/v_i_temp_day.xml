@@ -12,24 +12,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="26dp">
+        android:gravity="center"
+        android:weightSum="3"
+        android:padding="10dp">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtCityTempDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:fontFamily="@font/arquitecta_medium"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_26" />
+            android:textSize="@dimen/text_size_18" />
+
+        <ImageView
+            android:src="@drawable/rain"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:id="@+id/imvWeatherView"
+            android:layout_height="50dp"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtCityTempLowMax"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:fontFamily="@font/arquitecta_medium"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_26" />
+            android:textSize="@dimen/text_size_18" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

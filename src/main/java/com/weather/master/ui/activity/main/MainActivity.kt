@@ -8,6 +8,7 @@ import android.location.Address
 import android.location.Geocoder
 import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -71,7 +72,8 @@ class MainActivity : BaseActivity<MainViewModel>() {
                         val addresses: List<Address> = geocoder.getFromLocation(it.latitude, it.longitude, 1)
                         cityList.clear()
                         if (addresses.isNotEmpty()) {
-                            cityList.add(CityModel(it.latitude, it.longitude, addresses[0].getLocality()))
+                            Log.e("Address :" , addresses.toString())
+                            cityList.add(CityModel(it.latitude, it.longitude, addresses[0].locality))
                         }
 
                         cityList.add(CityModel(-33.865143, 151.209900, "Sydney"))

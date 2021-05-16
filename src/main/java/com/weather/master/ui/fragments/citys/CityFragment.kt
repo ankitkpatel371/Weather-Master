@@ -2,7 +2,11 @@ package com.weather.master.ui.fragments.citys
 
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
+import com.weather.master.R
 import com.weather.master.data.model.CityModel
+import com.weather.master.data.model.daily
+import com.weather.master.data.model.temp
 import com.weather.master.databinding.FCityBinding
 import com.weather.master.extentions.logLargeString
 import com.weather.master.extentions.obtainViewModel
@@ -11,6 +15,7 @@ import com.weather.master.utils.Status
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 
 class CityFragment(private val city: CityModel) : BaseFragment<CityViewModel>() {
@@ -54,10 +59,11 @@ class CityFragment(private val city: CityModel) : BaseFragment<CityViewModel>() 
                         viewModel.hideProgressDialog()
                         resource.data?.let { response ->
 
-                            binding.txtCityTemp.text = response.current.temp + "\u00B0" + "C"
+                            binding.txtCityTemp.text = convertStringtoInt(response.current.temp).toString() + "\u00B0" + "C"
                             response.current.weather.let {
                                 binding.txtCityTempStatus.text = it[0].description
                             }
+                            binding.txtCityTempLowMax.text = convertStringtoInt(response.daily[0].temp.min).toString()+"\u00B0C" + "/"+ convertStringtoInt(response.daily[0].temp.max).toString()+"\u00B0C"
 
 
                             val tomorrow = Calendar.getInstance() //current date and time
@@ -70,29 +76,30 @@ class CityFragment(private val city: CityModel) : BaseFragment<CityViewModel>() 
                             val formatter: DateFormat = SimpleDateFormat("EEE, d MMM yyyy")
                             formatter.timeZone = TimeZone.getTimeZone("UTC")
                             val date = Date()
-
+                            setupWeatherIcon(response.daily[0].weather.get(0).main, binding.imvWeatherCondition)
                             response.daily[1].let { daily ->
-
+                                setupWeatherIcon(daily.weather.get(0).main, binding.dayOne.imvWeatherView)
                                 date.time = daily.dt.toLong() * 1000
                                 if (date.time < tomorrow.time.time && date.time > Calendar.getInstance().time.time) {
                                     binding.dayOne.txtCityTempDate.text = "Tomorrow"
                                 } else {
                                     binding.dayOne.txtCityTempDate.text = formatter.format(date)
                                 }
-                                binding.dayOne.txtCityTempLowMax.text = daily.temp.max + "\u00B0C" + " / " + daily.temp.min + "\u00B0C"
+                                binding.dayOne.txtCityTempLowMax.text = convertStringtoInt(daily.temp.max).toString()+ "\u00B0C" + " / " + convertStringtoInt(daily.temp.min).toString() + "\u00B0C"
                             }
 
                             response.daily[2].let { daily ->
-
+                                setupWeatherIcon(daily.weather.get(0).main, binding.dayTwo.imvWeatherView)
                                 date.time = daily.dt.toLong() * 1000
                                 binding.dayTwo.txtCityTempDate.text = formatter.format(date)
-                                binding.dayTwo.txtCityTempLowMax.text = daily.temp.max + "\u00B0C" + " / " + daily.temp.min + "\u00B0C"
+                                binding.dayTwo.txtCityTempLowMax.text = convertStringtoInt(daily.temp.max).toString()+ "\u00B0C" + " / " + convertStringtoInt(daily.temp.min).toString() + "\u00B0C"
                             }
 
                             response.daily[3].let { daily ->
+                                setupWeatherIcon(daily.weather.get(0).main, binding.dayThree.imvWeatherView)
                                 date.time = daily.dt.toLong() * 1000
                                 binding.dayThree.txtCityTempDate.text = formatter.format(date)
-                                binding.dayThree.txtCityTempLowMax.text = daily.temp.max + "\u00B0C" + " / " + daily.temp.min + "\u00B0C"
+                                binding.dayThree.txtCityTempLowMax.text = convertStringtoInt(daily.temp.max).toString()+ "\u00B0C" + " / " + convertStringtoInt(daily.temp.min).toString() + "\u00B0C"
                             }
                         }
 
@@ -108,5 +115,24 @@ class CityFragment(private val city: CityModel) : BaseFragment<CityViewModel>() 
                 }
             }
         }
+    }
+    
+    private fun setupWeatherIcon(weatherCondition: String, imageView: ImageView)
+    {
+        when(weatherCondition)
+        {
+            "Rain" ->{
+                imageView.setImageResource(R.drawable.rain)
+            }
+            "Clouds" -> imageView.setImageResource(R.drawable.iovercast)
+            "Sunny" -> imageView.setImageResource(R.drawable.sunny)
+        }
+    }
+
+    private fun convertStringtoInt(inputString: String): Int
+    {
+        var temp: Float = inputString.toFloat()
+
+        return temp.roundToInt()
     }
 }
