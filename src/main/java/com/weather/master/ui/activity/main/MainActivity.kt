@@ -48,7 +48,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
                 }
                 else
                 {
-                   setUpPageViewr()
+                    setUpViewPager()
                 }
 
             } else {
@@ -99,7 +99,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
                             }
                             LocationServices.getFusedLocationProviderClient(this@MainActivity)
                                 .removeLocationUpdates(this)
-                            setUpPageViewr()
+                            setUpViewPager()
                             hideProgress()
 
                     }
@@ -112,7 +112,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
         LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(mLocationRequest, mLocationCallback, null)
     }
 
-    private fun setUpPageViewr()
+    private fun setUpViewPager()
     {
         cityList.add(CityModel(-33.865143, 151.209900, "Sydney"))
         cityList.add(CityModel(-33.758011, 150.705444, "Perth"))
