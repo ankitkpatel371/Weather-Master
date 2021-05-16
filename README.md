@@ -10,6 +10,8 @@ I use model for static data so we can easily replace with original API response.
 
 you can find Base Url in build.gradle file.
 
+If Application don't find location then it will show only three city data.
+
 If you need any other info please contact me.
 
 
