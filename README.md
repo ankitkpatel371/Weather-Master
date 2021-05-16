@@ -12,6 +12,8 @@ you can find Base Url in build.gradle file.
 
 If Application don't find location then it will show only three city data.
 
+It shows different background according to weather.
+
 If you need any other info please contact me.
 
 
