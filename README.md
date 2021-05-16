@@ -3,12 +3,12 @@
 I use https://api.openweathermap.org/data/2.5/onecall for getting data.
 
 This API gives only 7 days of data. 
-So I use Static data to show Future Forecast.
+So I use Static data to show future forecast.
 
 You can find static data in com.weather.master.ui.activity.main.FutureForecast file.
-I use model for static data so we can easly replace with original API response.
+I use model for static data so we can easily replace with original API response.
 
-you can find Base Url in buil.gradle file.
+you can find Base Url in build.gradle file.
 
 If you need any other info please contact me.
 
