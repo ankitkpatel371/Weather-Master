@@ -36,11 +36,14 @@ class CityFragment(private val city: CityModel) : BaseFragment<CityViewModel>() 
     override fun setUpUI() {
 
         binding.txtCityName.text = city.name
-
-        if (city.lat == null && city.lat == null) {
-            setupObservers(null, null)
-        } else {
-            setupObservers(city.lat, city.lon)
+        if(isInternetAvailable()) {
+            if (city.lat == null && city.lat == null) {
+                setupObservers(null, null)
+            } else {
+                setupObservers(city.lat, city.lon)
+            }
+        }else{
+            showNoInternetAvailable()
         }
 
         binding.txtfutureForecast.setOnClickListener {

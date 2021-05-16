@@ -40,11 +40,25 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
     override fun setUpChildUI(savedInstanceState: Bundle?) {
 
-        if (checkPermissions()) {
-            getLocation()
-        } else {
-            requestPermissions()
+        if(isInternetAvailable()) {
+            if (checkPermissions()) {
+                if(isLocationEnabled())
+                {
+                    getLocation()
+                }
+                else
+                {
+                   setUpPageViewr()
+                }
+
+            } else {
+                requestPermissions()
+            }
+        }else
+        {
+            showNoInternetAvailable()
         }
+
     }
 
     override fun onNetworkStatusChanged(isConnected: Boolean) {
@@ -63,33 +77,48 @@ class MainActivity : BaseActivity<MainViewModel>() {
         val mLocationCallback: LocationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 if (locationResult == null) {
+                    hideProgress()
                     return
                 }
                 for (location in locationResult.locations) {
                     location?.let {
-                        val geocoder = Geocoder(this@MainActivity, Locale.getDefault())
-                        val addresses: List<Address> = geocoder.getFromLocation(it.latitude, it.longitude, 1)
-                        cityList.clear()
-                        if (addresses.isNotEmpty()) {
-                            Log.e("Address :" , addresses.toString())
-                            cityList.add(CityModel(it.latitude, it.longitude, addresses[0].locality))
-                        }
 
-                        cityList.add(CityModel(-33.865143, 151.209900, "Sydney"))
-                        cityList.add(CityModel(-33.758011, 150.705444, "Perth"))
-                        cityList.add(CityModel(-42.880554, 147.324997, "Hobart"))
+                            val geocoder = Geocoder(this@MainActivity, Locale.getDefault())
+                            val addresses: List<Address> =
+                                geocoder.getFromLocation(it.latitude, it.longitude, 1)
+                            cityList.clear()
+                            if (addresses.isNotEmpty()) {
+                                Log.e("Address :", addresses.toString())
+                                cityList.add(
+                                    CityModel(
+                                        it.latitude,
+                                        it.longitude,
+                                        addresses[0].locality
+                                    )
+                                )
+                            }
+                            LocationServices.getFusedLocationProviderClient(this@MainActivity)
+                                .removeLocationUpdates(this)
+                            setUpPageViewr()
+                            hideProgress()
 
-                        val adp = CitysAdapter(supportFragmentManager, cityList)
-                        binding.viewPagerCity.adapter = adp
-
-                        LocationServices.getFusedLocationProviderClient(this@MainActivity).removeLocationUpdates(this)
-                        hideProgress()
                     }
                 }
+
             }
+
         }
 
         LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(mLocationRequest, mLocationCallback, null)
+    }
+
+    private fun setUpPageViewr()
+    {
+        cityList.add(CityModel(-33.865143, 151.209900, "Sydney"))
+        cityList.add(CityModel(-33.758011, 150.705444, "Perth"))
+        cityList.add(CityModel(-42.880554, 147.324997, "Hobart"))
+        val adp = CitysAdapter(supportFragmentManager, cityList)
+        binding.viewPagerCity.adapter = adp
     }
 
     private fun checkPermissions(): Boolean {
@@ -120,7 +149,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
                         ) == PackageManager.PERMISSION_GRANTED)
                     ) {
                         //Permission  Granted
-                        getLocation()
+                        setUpChildUI(null)
                     }
                 } else {
                     //Permission Denied
