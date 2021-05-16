@@ -1,0 +1,107 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.weather.master"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+            applicationIdSuffix ".debug"
+            minifyEnabled false
+            shrinkResources false
+            //useProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    flavorDimensions "environment"
+
+    productFlavors {
+
+        dev {
+
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+
+            def ROOT_URL = "api.openweathermap.org/"
+            def BASE_URL = "https://" + ROOT_URL
+
+            buildConfigField "String", "APP_ENVIROMENT", "\"Production\""
+
+            buildConfigField "String", "BASE_URL", "\"$BASE_URL\""
+
+            buildConfigField "String", "APP_ID", "\"453882df2830c2718984c3af464757db\""
+            buildConfigField "String", "APP_UNITS", "\"metric\""
+
+            dimension "environment"
+
+        }
+
+        prod {
+
+            applicationIdSuffix ".pro"
+            versionNameSuffix "-pro"
+
+            def ROOT_URL = "api.openweathermap.org/"
+            def BASE_URL = "https://" + ROOT_URL
+
+            buildConfigField "String", "APP_ENVIROMENT", "\"Production\""
+
+            buildConfigField "String", "BASE_URL", "\"$BASE_URL\""
+
+            buildConfigField "String", "APP_ID", "\"453882df2830c2718984c3af464757db\""
+            buildConfigField "String", "APP_UNITS", "\"metric\""
+
+            dimension "environment"
+
+        }
+    }
+    task wrapper(type: Wrapper){
+        gradleVersion = '2.14.1'
+    }
+}
+
+dependencies {
+
+    implementation commonDependencies.values()
+    implementation libraries.values()
+    implementation glideDependencies.values()
+
+    testImplementation testDependencies.values()
+    androidTestImplementation androidTestingDependencies.values()
+
+    api basicLibraries.values()
+    api jodaTimeDependencies.values()
+    api rxJavaDependencies.values()
+    api networkDependencies.values()
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/a_base_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/purple_500"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="26dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtCityTempDate1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/arquitecta_medium"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_26" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtCityTempLowMax1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/arquitecta_medium"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_26" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

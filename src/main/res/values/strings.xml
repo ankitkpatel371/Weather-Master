@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Weather-Master</string>
+
+    <string name="msg_no_internet_available">Please check your internet connection!</string>
+</resources>

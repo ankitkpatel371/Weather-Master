@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: org.joda:joda-convert:2.2.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.joda/joda-convert/2.2.1/f19f779c1f545d8a67f1a0dcfcacc385112370ca/joda-convert-2.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.joda/joda-convert/2.2.1/eb1f08279a6c69587d587842d2f642dfa8664c50/joda-convert-2.2.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.joda/joda-convert/2.2.1/d6b9945d5039c4f4d215d129254a9ff4c94347c8/joda-convert-2.2.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
