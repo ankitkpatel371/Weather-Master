@@ -51,13 +51,11 @@ class CityFragment(private val city: CityModel) : BaseFragment<CityViewModel>() 
 
     private fun setupObservers(lat: Double?, lon: Double?) {
 
-
         val request = if (lat == null || lon == null) {
             viewModel.fetchWeatherInformation()
         } else {
             viewModel.fetchWeatherInformation(lat.toString(), lon.toString())
         }
-
 
         request.observe(this) {
             it?.let { resource ->
@@ -125,7 +123,7 @@ class CityFragment(private val city: CityModel) : BaseFragment<CityViewModel>() 
             }
         }
     }
-    
+    // set up weather Icon accoring to response in weather. Using "icon".
     private fun setupWeatherIcon(weatherCondition: String, imageView: ImageView)
     {
         when(weatherCondition)
@@ -161,7 +159,6 @@ class CityFragment(private val city: CityModel) : BaseFragment<CityViewModel>() 
     private fun convertStringtoInt(inputString: String): Int
     {
         var temp: Float = inputString.toFloat()
-
         return temp.roundToInt()
     }
 }
