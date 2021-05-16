@@ -4,7 +4,6 @@
     android:id="@+id/a_base_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_500"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -18,32 +17,41 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtCityName"
+            android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/arquitecta_medium"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_26"
             tools:text="City Name" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtCityTemp"
+        <LinearLayout
+            android:gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/arquitecta_medium"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_86"
-            tools:text="19 \u00B0" />
-
+            android:layout_height="wrap_content">
         <ImageView
             android:layout_margin="5dp"
             android:id="@+id/imvWeatherCondition"
-            android:layout_width="50dp"
-            android:layout_height="50dp"/>
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtCityTemp"
+                android:layout_width="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arquitecta_medium"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_70"
+                tools:text="19 \u00B0" />
+        </LinearLayout>
+
+
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtCityTempLowMax"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:fontFamily="@font/arquitecta_medium"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_26"
@@ -56,6 +64,7 @@
             android:fontFamily="@font/arquitecta_medium"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_26"
+            android:layout_margin="5dp"
             tools:text="Clear" />
 
 
@@ -82,9 +91,7 @@
     <include
         android:id="@+id/dayThree"
         layout="@layout/v_i_temp_day"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="-1dp" />
+         />
 </LinearLayout>
 </RelativeLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

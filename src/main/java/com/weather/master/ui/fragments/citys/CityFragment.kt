@@ -61,7 +61,8 @@ class CityFragment(private val city: CityModel) : BaseFragment<CityViewModel>() 
 
                             binding.txtCityTemp.text = convertStringtoInt(response.current.temp).toString() + "\u00B0" + "C"
                             response.current.weather.let {
-                                binding.txtCityTempStatus.text = it[0].description
+                                binding.txtCityTempStatus.text = it[0].main
+                                setupWeatherIcon(it[0].icon, binding.imvWeatherCondition)
                             }
                             binding.txtCityTempLowMax.text = convertStringtoInt(response.daily[0].temp.min).toString()+"\u00B0C" + "/"+ convertStringtoInt(response.daily[0].temp.max).toString()+"\u00B0C"
 
@@ -76,9 +77,10 @@ class CityFragment(private val city: CityModel) : BaseFragment<CityViewModel>() 
                             val formatter: DateFormat = SimpleDateFormat("EEE, d MMM yyyy")
                             formatter.timeZone = TimeZone.getTimeZone("UTC")
                             val date = Date()
-                            setupWeatherIcon(response.daily[0].weather.get(0).main, binding.imvWeatherCondition)
+
+
                             response.daily[1].let { daily ->
-                                setupWeatherIcon(daily.weather.get(0).main, binding.dayOne.imvWeatherView)
+                                setupWeatherIcon(daily.weather.get(0).icon, binding.dayOne.imvWeatherView)
                                 date.time = daily.dt.toLong() * 1000
                                 if (date.time < tomorrow.time.time && date.time > Calendar.getInstance().time.time) {
                                     binding.dayOne.txtCityTempDate.text = "Tomorrow"
@@ -89,14 +91,14 @@ class CityFragment(private val city: CityModel) : BaseFragment<CityViewModel>() 
                             }
 
                             response.daily[2].let { daily ->
-                                setupWeatherIcon(daily.weather.get(0).main, binding.dayTwo.imvWeatherView)
+                                setupWeatherIcon(daily.weather.get(0).icon, binding.dayTwo.imvWeatherView)
                                 date.time = daily.dt.toLong() * 1000
                                 binding.dayTwo.txtCityTempDate.text = formatter.format(date)
                                 binding.dayTwo.txtCityTempLowMax.text = convertStringtoInt(daily.temp.max).toString()+ "\u00B0C" + " / " + convertStringtoInt(daily.temp.min).toString() + "\u00B0C"
                             }
 
                             response.daily[3].let { daily ->
-                                setupWeatherIcon(daily.weather.get(0).main, binding.dayThree.imvWeatherView)
+                                setupWeatherIcon(daily.weather.get(0).icon, binding.dayThree.imvWeatherView)
                                 date.time = daily.dt.toLong() * 1000
                                 binding.dayThree.txtCityTempDate.text = formatter.format(date)
                                 binding.dayThree.txtCityTempLowMax.text = convertStringtoInt(daily.temp.max).toString()+ "\u00B0C" + " / " + convertStringtoInt(daily.temp.min).toString() + "\u00B0C"
@@ -121,11 +123,31 @@ class CityFragment(private val city: CityModel) : BaseFragment<CityViewModel>() 
     {
         when(weatherCondition)
         {
-            "Rain" ->{
-                imageView.setImageResource(R.drawable.rain)
+            "01d" -> {imageView.setImageResource(R.drawable.d01)
+                       binding.aBaseLayout.setBackgroundResource(R.drawable.gradient_bg_clear)}
+            "02d" -> {imageView.setImageResource(R.drawable.d02)
+                binding.aBaseLayout.setBackgroundResource(R.drawable.gradient_bg_cloud)}
+            "03d" -> {
+                imageView.setImageResource(R.drawable.d03)
+                binding.aBaseLayout.setBackgroundResource(R.drawable.gradient_bg_cloud)
             }
-            "Clouds" -> imageView.setImageResource(R.drawable.iovercast)
-            "Sunny" -> imageView.setImageResource(R.drawable.sunny)
+            "04d" -> {
+                imageView.setImageResource(R.drawable.d04)
+                binding.aBaseLayout.setBackgroundResource(R.drawable.gradient_bg_cloud)
+            }
+            "09d" -> {
+                imageView.setImageResource(R.drawable.d09)
+                binding.aBaseLayout.setBackgroundResource(R.drawable.gradient_bg_rain)
+            }
+            "10d" -> {imageView.setImageResource(R.drawable.d10)
+                binding.aBaseLayout.setBackgroundResource(R.drawable.gradient_bg_rain)
+            }
+            "11d" -> {imageView.setImageResource(R.drawable.d11)
+            binding.aBaseLayout.setBackgroundResource(R.drawable.gradient_bg_rain)
+        }
+            "50d" -> {imageView.setImageResource(R.drawable.d50)
+        binding.aBaseLayout.setBackgroundResource(R.drawable.gradient_bg_rain)
+    }
         }
     }
 

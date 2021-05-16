@@ -10,6 +10,7 @@
     <dimen name="text_size_22">22sp</dimen>
     <dimen name="text_size_24">24sp</dimen>
     <dimen name="text_size_26">26sp</dimen>
+    <dimen name="text_size_70">70sp</dimen>
     <dimen name="text_size_86">86sp</dimen>
 
 </resources>
