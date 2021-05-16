@@ -92,6 +92,16 @@
         android:id="@+id/dayThree"
         layout="@layout/v_i_temp_day"
          />
+    <TextView
+        android:layout_width="match_parent"
+        android:text="15 Days >>"
+        android:fontFamily="@font/arquitecta_medium"
+        android:textSize="@dimen/text_size_15"
+        android:textColor="@color/white"
+        android:id="@+id/txtfutureForecast"
+        android:layout_margin="5dp"
+        android:gravity="right"
+        android:layout_height="wrap_content"/>
 </LinearLayout>
 </RelativeLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

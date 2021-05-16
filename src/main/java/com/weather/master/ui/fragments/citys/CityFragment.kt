@@ -1,5 +1,6 @@
 package com.weather.master.ui.fragments.citys
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -10,6 +11,7 @@ import com.weather.master.data.model.temp
 import com.weather.master.databinding.FCityBinding
 import com.weather.master.extentions.logLargeString
 import com.weather.master.extentions.obtainViewModel
+import com.weather.master.ui.activity.main.FutureForecast
 import com.weather.master.ui.base.BaseFragment
 import com.weather.master.utils.Status
 import java.text.DateFormat
@@ -39,6 +41,11 @@ class CityFragment(private val city: CityModel) : BaseFragment<CityViewModel>() 
             setupObservers(null, null)
         } else {
             setupObservers(city.lat, city.lon)
+        }
+
+        binding.txtfutureForecast.setOnClickListener {
+            val intent = Intent(activity, FutureForecast::class.java)
+            startActivity(intent)
         }
     }
 

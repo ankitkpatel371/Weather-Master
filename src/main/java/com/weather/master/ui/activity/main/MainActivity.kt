@@ -2,7 +2,8 @@ package com.weather.master.ui.activity.main
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
+import android.content.Intent
+
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
@@ -52,8 +53,6 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
     @SuppressLint("MissingPermission")
     private fun getLocation() {
-
-
         val mLocationRequest = LocationRequest.create()
         mLocationRequest.interval = 60000
         mLocationRequest.fastestInterval = 5000
@@ -102,7 +101,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
     }
 
     private fun isLocationEnabled(): Boolean {
-        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
 
